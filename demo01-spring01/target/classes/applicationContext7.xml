@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+    BeanFactory
+        IOC容器的顶级接口.在Spring框架内部会经常使用该接口  Spring框架的源码中,经常是使用该接口设计代码
+        ApplicationContext是BeanFactory的子接口之一,这个接口是程序员编写应用代码时,经常使用的接口
+
+    FactoryBean
+        工厂Bean.专门用于实例化一些通过Bean标签无法直接实例化,需要运行一些代码来实例化的对象
+        专门用于生产其他Bean的一个工厂
+    -->
+
+    <bean id="person1" class="com.atshijie.component7.Person">
+        <property name="pname" value="小明"></property>
+        <property name="page" value="10"></property>
+    </bean>
+
+    <bean id="person2" class="com.atshijie.component7.PersonFactoryBean"></bean>
+
+</beans>

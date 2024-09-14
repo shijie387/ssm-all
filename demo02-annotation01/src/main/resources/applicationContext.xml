@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--
+    让IOC容器去扫描程序中的包,将包中做了特殊标记的一些类自动实例化即可, 这样就无需再xml书写大量的Bean标签
+    这些特殊标记就是一些注解
+
+    IOC的常见注解   用于实例化对象的常见注解
+    @Component 用于表示一个类是一个组件
+        @Controller   专门用于Controller组件
+        @Service      专门用于servcie
+        @Repository   专门用于到dao
+
+    包扫描时, bean的id默认值是类名的首字母小写 OrderController   orderController
+    可以通过注解直接指定id
+    -->
+    <!--配置不扫描的bean-->
+    <!--<context:component-scan base-package="com.atshijie">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>-->
+
+
+    <!--配置只扫描bean-->
+    <!--<context:component-scan base-package="com.atshijie" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>-->
+
+
+    <!--
+    读取外部的properties配置文件
+
+    -->
+
+    <context:property-placeholder location="classpath:account.properties"></context:property-placeholder>
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+    <context:component-scan base-package="com.atshijie"></context:component-scan>
+
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url"  value="${jdbc_url}"></property>
+        <property name="driverClassName"  value="${jdbc_driver}"></property>
+        <property name="username"  value="${jdbc_username}"></property>
+        <property name="password"  value="${jdbc_password}"></property>
+    </bean>
+
+</beans>
